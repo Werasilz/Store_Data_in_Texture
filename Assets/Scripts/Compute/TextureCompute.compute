@@ -1,0 +1,11 @@
+#pragma kernel WriteData
+
+int _Size;
+RWTexture2D<float4> _Texture;
+
+[numthreads(8,8,1)]
+void WriteData (uint3 id : SV_DispatchThreadID)
+{
+    int ind = id.x + (id.y * _Size);
+    _Texture[id.xy] = float4((float)ind / 256.0, 0, 0, 0);
+}
